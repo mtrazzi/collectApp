@@ -36,7 +36,7 @@ const assos = [
   }
 ]
 
-export default class App extends Component {
+export default class DonationForm extends Component {
 
   constructor(props){
     super(props);
@@ -46,7 +46,8 @@ export default class App extends Component {
       bon_livraison: '',
       store: stores[0],
       asso: null,
-      supplies: [newSupply(), newSupply()]
+      supplies: [newSupply(), newSupply()],
+      current: true
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -158,7 +159,7 @@ export default class App extends Component {
                     name="date_donation"
                     onChange={this.handleInputChange}
                   />
-                  <label htmlFor="date_donation">Date donation</label>
+                  <label htmlFor="date_donation" className="active">Date donation</label>
                 </div>
                 <div className="input-field col s6">
                   <input 
@@ -193,7 +194,7 @@ export default class App extends Component {
                     name="NF"
                     onChange={this.handleStoreInputChange}
                   />
-                  <label htmlFor="NF_store">NF</label>
+                  <label htmlFor="NF_store" className="active">NF</label>
                 </div>
                 
                 <div className="input-field col s12">
@@ -205,7 +206,7 @@ export default class App extends Component {
                     name="adresse"
                     onChange={this.handleStoreInputChange}
                   />
-                  <label htmlFor="adresse_store">Adresse</label>
+                  <label htmlFor="adresse_store" className="active">Adresse</label>
                 </div>
               </div>
             </li>

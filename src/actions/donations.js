@@ -4,3 +4,10 @@ export const addDonation = (donation) => {
     donation
   }
 }
+
+export const validateDonation = (donationId) => {
+  return {
+    type: 'VALIDATE_DONATION',
+    donationId
+  }
+}
