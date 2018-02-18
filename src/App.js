@@ -5,7 +5,7 @@ import DonationForm from './containers/donationForm';
 export default () => (
   <Router>
     <div>
-      <ul>
+      <ul className="navbar">
         <li>
           <Link to="/">Accueil</Link>
         </li>
