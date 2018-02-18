@@ -52,7 +52,6 @@ const computeDonationPrice = (donation) => {
   let donationPrice = 0;
 
   donation.supplies.forEach((supply) => {
-    console.log(supply)
     donationPrice += supply.volume * supply.valeurUnitaire
   })
   return donationPrice;

@@ -6,7 +6,7 @@ import './style.css';
 export default class HomeAsso extends Component {
   render() {
     return (
-      <div className="banner">
+      <div className="banner" id="assos">
         <div className="container">
           <h1>COLLECT'</h1>
           <h2>Une solution du groupe Casino qui facilite les dons alimentaires via la blockchain</h2>

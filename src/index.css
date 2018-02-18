@@ -10,6 +10,19 @@ body {
   font-family: sans-serif;
 }
 
+#root{
+  min-height: 100%;
+  
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -100px;
+}
+footer,
+#push {
+  height: 100px;
+}
+
+
 head{
   margin: 0;
 }
