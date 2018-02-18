@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import DonationForm from './containers/donationForm';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+export default () => (
+  <Router>
+    <div>
+      <ul>
+        <li>
+          <Link to="/">Accueil</Link>
+        </li>
+        <li>
+          <Link to="/nouveau-don">Saisir don</Link>
+        </li>
+        <li>
+          <Link to="/valider-don">Valider don</Link>
+        </li>
+      </ul>
 
-export default App;
+      <hr />
+
+      <Route exact path="/" component={Home} />
+      <Route path="/nouveau-don" component={DonationForm} />
+      <Route path="/valider-don" component={DonationValidation} />
+    </div>
+  </Router>
+);
+
+const Home = () => (
+  <div>
+    <h2>Home</h2>
+  </div>
+);
+
+const DonationValidation = () => (
+  <div>
+    <h2>Donation Validation</h2>
+  </div>
+)
