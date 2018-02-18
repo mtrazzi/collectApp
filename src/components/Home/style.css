@@ -1,0 +1,61 @@
+
+h1, h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+}
+h2 {
+  color: #A0A0A0;
+  font-weight: normal;
+}
+
+/* Other COlor */
+/*#81d742 -- vert clair
+/*#006B38 -- vert foncé casino
+
+/* Custom design */
+
+#collect {
+font-size: 50px;
+
+}
+.banner {
+  height: 85vh;
+  background-image: url("bannerv.jpg");
+  background-size: cover;
+  color: white;
+  padding: 120px 0;
+  text-shadow: 1px 1px 5px black;
+  filter: brightness(100%);
+  -webkit-filter: brightness(100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner h1, .banner h2 {
+  font-size: 2em;
+  font-weight: bold;
+  text-shadow: 1px 1px 5px black;
+  margin: 10px;
+  color: white;
+  opacity: 0.95;
+  font-weight: lighter;
+  font-style: italic;
+
+}
+.banner h1 {
+  font-size: 3em;
+  font-weight: bold;
+  padding-bottom: 30px;
+}
+.banner p {
+  font-size: 22px;
+  color: white;
+  font-style: italic;
+  opacity: 0.95
+}
+
+
+.linkCTA {
+  margin-top: 50px;
+  font-size: 1em;
+}
