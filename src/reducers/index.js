@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import newDonation from './donationForm';
+import donations from './donations';
 
 const rootReducer = combineReducers({
-  newDonation
+  donations
 });
 
 export default rootReducer;

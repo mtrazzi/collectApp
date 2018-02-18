@@ -1,13 +1,18 @@
 import { connect } from 'react-redux';
+import {
+  addDonation
+} from '../../actions/donations';
 import DonationForm from '../../components/DonationForm';
 
 const mapStateToProps = state => {
-  console.dir(state)
-  return state.newDonation;
+  return {};
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    onFormSubmit: function(donation){
+      dispatch(addDonation(donation))
+    }
   }
 }
 

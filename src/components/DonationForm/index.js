@@ -349,7 +349,7 @@ export default class App extends Component {
           </ul>
 
           <div className="center-align">
-            <button className="btn waves-effect waves-light" type="submit" name="action">
+            <button className="btn waves-effect waves-light" onClick={(event) => {event.preventDefault(); this.props.onFormSubmit(this.state)}}>
               Enregistrer la donation
             </button>
           </div>
