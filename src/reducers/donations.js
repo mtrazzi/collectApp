@@ -2,7 +2,7 @@ const initState = [
  {
   date_donation: '16 février 2018',
   bon_livraison: '12345',
-  current: true,
+  current: false,
   store: {
     name: 'Casino Supermarché et drive Saint-etienne Bergson',
     adresse: '60 rue de Bergson 42000 SAINT ETIENNE',

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 
+import './style.css';
+
 export default class DonationsValidation extends Component {
   constructor(props){
     super(props);
-
-    console.dir(props)
   }
 
   render(){
@@ -16,7 +16,7 @@ export default class DonationsValidation extends Component {
       <div className="container">
         <h1>Donations</h1>
 
-        <table>
+        <table className="validationDonTable">
           <thead>
             <tr>
               <th>Donateur</th>
@@ -36,7 +36,7 @@ export default class DonationsValidation extends Component {
                   donation.current ? 
                   <button onClick={(event) => { event.preventDefault(); this.props.validateDonation(id)}} className="btn waves-effect waves-light">Valider</button>
                   :
-                  <p>Validée</p>
+                  <p className="validationTruc">Validée</p>
                 }
               </td>
             </tr>
