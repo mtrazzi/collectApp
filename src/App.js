@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import DonationForm from './containers/donationForm';
+import DonationsValidation from './containers/donationsValidation';
 
 export default () => (
   <Router>
@@ -21,7 +22,7 @@ export default () => (
 
       <Route exact path="/" component={Home} />
       <Route path="/nouveau-don" component={DonationForm} />
-      <Route path="/valider-don" component={DonationValidation} />
+      <Route path="/valider-don" component={DonationsValidation} />
     </div>
   </Router>
 );
@@ -31,9 +32,3 @@ const Home = () => (
     <h2>Home</h2>
   </div>
 );
-
-const DonationValidation = () => (
-  <div>
-    <h2>Donation Validation</h2>
-  </div>
-)
