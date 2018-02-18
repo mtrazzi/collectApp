@@ -1,17 +1,8 @@
 import { combineReducers } from 'redux';
-
-const visibilityFilter = (state = 'SHOW_ALL', action) => {
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter
-    default:
-      return state
-  }
-}
-
+import newDonation from './donationForm';
 
 const rootReducer = combineReducers({
-  visibilityFilter
+  newDonation
 });
 
 export default rootReducer;
