@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import $ from 'jquery'; 
 import 'materialize-css/dist/js/materialize.min.js'
 
@@ -22,11 +23,13 @@ const stores = [
 
 const assos = [
   {
+    id: 1,
     name: 'Unicef',
     NF: '120000000',
     adresse: '104 Avenue du Président Kennedy 75016 Paris'
   },
   {
+    id: 2,
     name: 'Les restos du coeur',
     NF: '170000000',
     adresse: '65 avenue des champs-élysées   75008 Paris'
@@ -47,14 +50,22 @@ export default class App extends Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleStoreInputChange = this.handleStoreInputChange.bind(this);
+    this.handleAssoInputChange = this.handleAssoInputChange.bind(this);
+    this.handleAddProduct = this.handleAddProduct.bind(this);
   }
 
   componentDidMount(){
     $('select').material_select();
+
+    // Use Materialize custom select input
+    $(ReactDOM.findDOMNode(this.refs.testSelect)).on('change',this.handleAssoChange.bind(this));
   }
 
 
   handleInputChange(event) {
+
+    event.preventDefault();
     
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -62,6 +73,69 @@ export default class App extends Component {
 
     this.setState({
       [name]: value
+    });
+  }
+
+  handleAddProduct(event) {
+    event.preventDefault();
+
+    let supplies = this.state.supplies;
+
+    supplies.push(newSupply())
+
+    this.setState({
+      supplies: supplies
+    });
+  }
+
+  handleAssoChange(event) {
+
+    const asso =  assos.filter( (asso) => asso.id == event.target.value )
+
+    this.setState({
+      asso: asso[0]
+    });
+  }
+
+  handleStoreInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    let store = this.state.store;
+
+    store[name] = value;
+
+    this.setState({
+      store: store
+    });
+  }
+
+  handleAssoInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    let asso = this.state.asso;
+
+    asso[name] = value;
+
+    this.setState({
+      asso: asso
+    });
+  }
+
+  handleSupplyInputChange(event, id) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    let supplies = this.state.supplies;
+
+    supplies[id][name] = value;
+
+    this.setState({
+      supplies: supplies
     });
   }
 
@@ -102,8 +176,7 @@ export default class App extends Component {
             <li className="collection-item">
               <div className="row">
                 <div className="input-field col s8">
-                  <select 
-                    value={1} 
+                  <select
                     onChange={this.handleChange}>
                     <option value="0" disabled>Choisir le magasin donateur</option>
                     <option value="1">{stores[0].name}</option>
@@ -112,12 +185,26 @@ export default class App extends Component {
                 </div>
 
                 <div className="input-field col s4">
-                  <input value="140000000" id="NF_store" type="text" className="validate" />
+                  <input 
+                    value={this.state.store.NF}
+                    id="NF_store" 
+                    type="text" 
+                    className="validate" 
+                    name="NF"
+                    onChange={this.handleStoreInputChange}
+                  />
                   <label htmlFor="NF_store">NF</label>
                 </div>
                 
                 <div className="input-field col s12">
-                  <input value="60 rue de Bergson 42000 SAINT ETIENNE" id="adresse_store" type="text" className="validate" />
+                  <input 
+                    value={this.state.store.adresse} 
+                    id="adresse_store" 
+                    type="text" 
+                    className="validate" 
+                    name="adresse"
+                    onChange={this.handleStoreInputChange}
+                  />
                   <label htmlFor="adresse_store">Adresse</label>
                 </div>
               </div>
@@ -125,24 +212,47 @@ export default class App extends Component {
 
             <li className="collection-item">
               <div className="row">
-                
                 <div className="input-field col s8">
-                  <select id="name_asso">
-                    <option value="" disabled selected>Choisir le bénéficiaire du don</option>
-                    <option value="1">Unicef</option>
-                    <option value="2">Les restos du coeur</option>
+                  <select 
+                    value={this.state.asso ? this.state.asso.id : 0}
+                    id="name_asso"
+                    ref="testSelect"
+                    onChange={this.handleChange}>
+                  >
+                    <option value="0" disabled>Choisir le bénéficiaire du don</option>
+                    {assos.map((asso) => <option key={asso.id} value={asso.id}>{asso.name}</option>)}
                   </select>
                   <label htmlFor="name_asso">Bénéficiaire</label>
                 </div>
 
                 <div className="input-field col s4">
-                  <input id="NF_asso" type="text" className="validate" />
-                  <label htmlFor="NF_asso">NF</label>
+                  <input 
+                    value={this.state.asso ? this.state.asso.NF : ''}
+                    id="NF_asso" 
+                    type="text" 
+                    className="validate"  
+                    name="NF"
+                    onChange={this.handleAssoInputChange}
+                  />
+                  <label 
+                    className={this.state.asso ? "active" : ""}
+                    htmlFor="NF_asso"
+                  >NF</label>
                 </div>
                 
                 <div className="input-field col s12">
-                  <input id="adresse_asso" type="text" className="validate" />
-                  <label htmlFor="adresse_asso">Adresse</label>
+                  <input 
+                    value={this.state.asso ? this.state.asso.adresse : ''}
+                    id="adresse_asso" 
+                    type="text" 
+                    className="validate" 
+                    name="adresse"
+                    onChange={this.handleAssoInputChange}
+                  />
+                  <label 
+                    className={this.state.asso ? "active" : ""}
+                    htmlFor="adresse_asso"
+                  >Adresse</label>
                 </div>
 
                 <div className="col s12">
@@ -161,8 +271,79 @@ export default class App extends Component {
 
             <li className="collection-item">
               <div className="row">
-                {this.state.supplies.map( (supply, key) => <p key={key}>{key}</p>)}
-                <button className="btn waves-effect waves-light">Autre produit</button>
+
+                <table>
+                  <thead>
+                    <tr>
+                        <th>Code Produit</th>
+                        <th>Lot Produit</th>
+                        <th>Produit</th>
+                        <th>Date Limite d'Utilisation Optimale</th>
+                        <th>Volume</th>
+                        <th>Valeur Unitaire €</th>
+                        <th>Total €</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {this.state.supplies.map( (supply, key) => (
+                      <tr key={key}>
+                        <td>
+                          <input
+                            value={supply.code_produit}
+                            name="code_produit"
+                            type="text"
+                            onChange={(event) => this.handleSupplyInputChange(event, key)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            value={supply.lot_produit}
+                            name="lot_produit"
+                            type="text"
+                            onChange={(event) => this.handleSupplyInputChange(event, key)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            value={supply.name}
+                            name="name"
+                            type="text"
+                            onChange={(event) => this.handleSupplyInputChange(event, key)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            value={supply.DLUO}
+                            name="DLUO"
+                            type="text"
+                            onChange={(event) => this.handleSupplyInputChange(event, key)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            value={supply.volume}
+                            name="volume"
+                            type="text"
+                            onChange={(event) => this.handleSupplyInputChange(event, key)}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            value={supply.valeurUnitaire}
+                            name="valeurUnitaire"
+                            type="text"
+                            onChange={(event) => this.handleSupplyInputChange(event, key)}
+                          />
+                        </td>
+                        <td>{supply.volume * supply.valeurUnitaire}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="right-align">
+                  <button onClick={this.handleAddProduct} className="btn waves-effect waves-light">Autre produit</button>
+                </div>
               </div>
             </li>
           </ul>
